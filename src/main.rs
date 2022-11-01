@@ -1,17 +1,32 @@
+use std::fs;
+use std::io;
 use std::time::{Instant};
+mod b;
 
 fn main() {
-    println!("Starting...");
-    let start = Instant::now();
+    println!("Zadejte zadání: ");
+    let input = read_line();
+    let input = input.trim();
 
-    const NUMBER: i64 = 1_000_000_000;
-    let mut i = 0;
-
-    while i != NUMBER {
-        i+=1;
+    if input == String::from("B") {
+        let start = Instant::now();
+        b::solve(read_file(&String::from("B.txt")));
+        println!("Vyřešeno za {:?}", start.elapsed());
+    } else {
+        println!("Nenalezeno");
     }
+}
 
-    let duration = start.elapsed();
+pub fn read_line() -> String {
+    let mut val = String::new();
+    io::stdin().read_line(&mut val).expect("Failed to read line");
+    val
+}
 
-    println!("Time elapsed is: {:?}", duration);
+pub fn read_file(file: &String) -> String {
+    fs::read_to_string(file).expect("Failed to read the file")
+}
+
+pub fn write_file(file: &String, content: &String) {
+    fs::write(file, content).unwrap();
 }

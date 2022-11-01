@@ -3,7 +3,7 @@
         {
             "type": "cargo",
             "name": "Cargo Run",
-            "cargoArgs": ["run"],
+            "cargoArgs": ["run", "-r"],
         },
 
     ]
